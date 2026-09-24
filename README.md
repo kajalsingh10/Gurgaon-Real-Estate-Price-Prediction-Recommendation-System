@@ -139,25 +139,4 @@ Each signal produces a cosine-similarity matrix, and the matrices are combined i
 └── README.md
 ```
 
-> Adjust the folders above to match how your repository is actually organised.
-
-## Getting Started
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
-
-# 2. (Optional) create a virtual environment
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Launch Jupyter and run the notebooks in the order listed above
-jupyter notebook
-```
-
-
 
