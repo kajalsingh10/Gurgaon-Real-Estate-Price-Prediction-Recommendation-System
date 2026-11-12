@@ -449,7 +449,7 @@ with col1:
     """, unsafe_allow_html=True)
 
     if st.button("Explore Analytics →", key="analytics"):
-        st.switch_page("pages/Analytics.py")
+        st.switch_page("pages/analytics.py")
 
 with col2:
     st.markdown("""
