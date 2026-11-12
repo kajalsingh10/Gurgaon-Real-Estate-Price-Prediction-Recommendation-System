@@ -357,6 +357,7 @@ with st.sidebar:
         </div>
     </div>
     """, unsafe_allow_html=True)
+    
 
 
 # ==================================================
@@ -516,4 +517,12 @@ st.markdown("""
 <div class="footer">
     © 2026 Gurgaon Estates | Real Estate Intelligence Platform
 </div>
+""", unsafe_allow_html=True)
+st.markdown("""
+<style>
+button[data-testid="stSidebarCollapsedControl"] {
+    color: black !important;
+    background-color: white !important;
+}
+</style>
 """, unsafe_allow_html=True)
