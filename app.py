@@ -464,7 +464,7 @@ with col2:
     """, unsafe_allow_html=True)
 
     if st.button("Predict Price →", key="prediction"):
-        st.switch_page("pages/Price_Prediction.py")
+        st.switch_page("pages/price_prediction.py")
 
 with col3:
     st.markdown("""
