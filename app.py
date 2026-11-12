@@ -368,10 +368,10 @@ with st.sidebar:
         st.rerun()
 
     if st.button("📊  Market Analytics", use_container_width=True, key="nav_analytics"):
-        st.switch_page("pages/Analytics.py")
+        st.switch_page("pages/analytics.py")
 
     if st.button("💰  Price Prediction", use_container_width=True, key="nav_prediction"):
-        st.switch_page("pages/Price_Prediction.py")
+        st.switch_page("pages/price_prediction.py")
 
     if st.button("🔎  Property Recommendations", use_container_width=True, key="nav_recommendation"):
         st.switch_page("pages/Recommendation.py")
