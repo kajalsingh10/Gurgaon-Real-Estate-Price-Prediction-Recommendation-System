@@ -43,6 +43,50 @@ st.markdown(
         backdrop-filter: blur(8px);
     }
 
+    /* Sidebar toggle: white button with a dark navy arrow.
+       Only the toggle control is styled; the sidebar keeps its original gradient. */
+    /* Sidebar toggle: white box, black arrow and black border */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"] {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #000000 !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+}
+
+/* Force arrow icon to black */
+[data-testid="stSidebarCollapseButton"] *,
+[data-testid="stSidebarCollapsedControl"] *,
+[data-testid="stExpandSidebarButton"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* Keep exactly the same colors on hover */
+[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="stSidebarCollapsedControl"]:hover,
+[data-testid="stExpandSidebarButton"]:hover {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #000000 !important;
+    color: #000000 !important;
+}
+
+/* Keep the same colors on hover and focus */
+button[data-testid="stSidebarCollapseButton"]:hover,
+button[data-testid="stSidebarCollapsedControl"]:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover,
+[data-testid="stExpandSidebarButton"] button:hover,
+button[data-testid="stSidebarCollapseButton"]:focus,
+button[data-testid="stSidebarCollapsedControl"]:focus {
+    background-color: #FFFFFF !important;
+    border-color: #000000 !important;
+    color: #000000 !important;
+}
+
     .block-container {
         max-width: 1380px;
         padding-top: 1.6rem;

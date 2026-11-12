@@ -31,7 +31,7 @@ html, body, [class*="css"] {
 
 /* Transparent top header so sidebar toggle remains accessible */
 header[data-testid="stHeader"] {
-    background: transparent;
+    background: transparent !important;
 }
 
 #MainMenu {visibility: hidden;}
@@ -44,6 +44,36 @@ footer {visibility: hidden;}
 }
 
 /* ==================================================
+   SIDEBAR TOGGLE ARROWS (<< AND >>) IN BLACK
+   ================================================== */
+[data-testid="stSidebarHeader"] button,
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapsedControl"] button,
+[data-testid="stExpandSidebarButton"],
+[data-testid="stExpandSidebarButton"] button,
+[data-testid="collapsedControl"],
+[data-testid="collapsedControl"] button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-testid="stSidebarHeader"] button *,
+[data-testid="stSidebarCollapseButton"] *,
+[data-testid="stSidebarCollapsedControl"] *,
+[data-testid="stExpandSidebarButton"] *,
+[data-testid="collapsedControl"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* ==================================================
    SIDEBAR STYLING
    ================================================== */
 [data-testid="stSidebar"] {
@@ -51,7 +81,9 @@ footer {visibility: hidden;}
     border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-[data-testid="stSidebar"] * {
+[data-testid="stSidebar"] .stMarkdown,
+[data-testid="stSidebar"] .stMarkdown p,
+[data-testid="stSidebar"] .stMarkdown div {
     color: #f1f5f9;
 }
 
@@ -339,7 +371,7 @@ with st.sidebar:
         st.switch_page("pages/Analytics.py")
 
     if st.button("💰  Price Prediction", use_container_width=True, key="nav_prediction"):
-        st.switch_page(st.switch_page("pages/price_prediction.py"))
+        st.switch_page("pages/Price_Prediction.py")
 
     if st.button("🔎  Property Recommendations", use_container_width=True, key="nav_recommendation"):
         st.switch_page("pages/Recommendation.py")
@@ -357,7 +389,6 @@ with st.sidebar:
         </div>
     </div>
     """, unsafe_allow_html=True)
-    
 
 
 # ==================================================
@@ -517,12 +548,4 @@ st.markdown("""
 <div class="footer">
     © 2026 Gurgaon Estates | Real Estate Intelligence Platform
 </div>
-""", unsafe_allow_html=True)
-st.markdown("""
-<style>
-button[data-testid="stSidebarCollapsedControl"] {
-    color: black !important;
-    background-color: white !important;
-}
-</style>
 """, unsafe_allow_html=True)

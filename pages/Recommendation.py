@@ -58,6 +58,48 @@ st.markdown("""
     /* Deep Navy Sidebar */
     section[data-testid="stSidebar"] { background-color: #0F293A !important; border-right: 1px solid #1B3B50; }
     section[data-testid="stSidebar"] * { color: #F8FAFC !important; }
+
+    /* Black Sidebar Collapse Arrow (<<) */
+    [data-testid="stSidebarCollapseButton"] button,
+    section[data-testid="stSidebar"] button[kind="header"],
+    section[data-testid="stSidebar"] button[kind="headerNoPadding"],
+    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"],
+    section[data-testid="stSidebar"] [data-testid="baseButton-headerNoPadding"] {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-radius: 8px !important;
+        opacity: 1 !important;
+    }
+
+    [data-testid="stSidebarCollapseButton"] button *,
+    section[data-testid="stSidebar"] button[kind="header"] *,
+    section[data-testid="stSidebar"] button[kind="headerNoPadding"] *,
+    section[data-testid="stSidebar"] [data-testid="stBaseButton-headerNoPadding"] *,
+    section[data-testid="stSidebar"] [data-testid="baseButton-headerNoPadding"] * {
+        color: #000000 !important;
+        fill: #000000 !important;
+    }
+
+    /* Black Sidebar Expand Arrow (>>) when sidebar is hidden */
+    [data-testid="stExpandSidebarButton"] button,
+    [data-testid="collapsedControl"] button,
+    header[data-testid="stHeader"] button[kind="headerNoPadding"],
+    header[data-testid="stHeader"] [data-testid="stBaseButton-headerNoPadding"] {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 8px !important;
+        opacity: 1 !important;
+    }
+
+    [data-testid="stExpandSidebarButton"] button *,
+    [data-testid="collapsedControl"] button *,
+    header[data-testid="stHeader"] button[kind="headerNoPadding"] *,
+    header[data-testid="stHeader"] [data-testid="stBaseButton-headerNoPadding"] * {
+        color: #000000 !important;
+        fill: #000000 !important;
+    }
+
     .sb-brand { padding: 0.4rem 0 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); margin-bottom: 1rem; }
     .sb-title { font-size: 1.2rem; font-weight: 800; color: #FFFFFF !important; }
     .sb-sub { font-size: 0.68rem; letter-spacing: 0.14em; color: #7FA1B5 !important; font-weight: 700; margin-top: 3px; }

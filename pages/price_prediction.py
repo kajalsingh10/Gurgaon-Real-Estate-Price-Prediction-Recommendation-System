@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+import streamlit.components.v1 as components
 
 # =====================================================
 # PAGE CONFIGURATION
@@ -44,6 +45,69 @@ html, body, .stApp, [data-testid="stAppViewContainer"] {
 }
 
 /* =====================================================
+   SIDEBAR TOGGLE ARROW (BLACK & HIGH-CONTRAST)
+   ===================================================== */
+[data-testid="stSidebarHeader"] button,
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="collapsedControl"] button,
+[data-testid="stExpandSidebarButton"] button,
+[data-testid="stSidebar"] button[kind="header"],
+[data-testid="stHeader"] button[kind="header"] {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    color: #000000 !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14) !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stSidebarHeader"] button:hover,
+[data-testid="stSidebarCollapseButton"] button:hover,
+[data-testid="collapsedControl"] button:hover,
+[data-testid="stExpandSidebarButton"] button:hover,
+[data-testid="stSidebar"] button[kind="header"]:hover,
+[data-testid="stHeader"] button[kind="header"]:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+}
+
+[data-testid="stSidebarHeader"] button span,
+[data-testid="stSidebarCollapseButton"] button span,
+[data-testid="collapsedControl"] button span,
+[data-testid="stExpandSidebarButton"] button span,
+[data-testid="stSidebar"] button[kind="header"] span,
+[data-testid="stHeader"] button[kind="header"] span,
+[data-testid="stSidebarHeader"] [data-testid="stIconMaterial"],
+[data-testid="stSidebarCollapseButton"] [data-testid="stIconMaterial"],
+[data-testid="collapsedControl"] [data-testid="stIconMaterial"],
+[data-testid="stExpandSidebarButton"] [data-testid="stIconMaterial"],
+[data-testid="stHeader"] [data-testid="stIconMaterial"] {
+    color: #000000 !important;
+}
+
+[data-testid="stSidebarHeader"] button svg,
+[data-testid="stSidebarCollapseButton"] button svg,
+[data-testid="collapsedControl"] button svg,
+[data-testid="stExpandSidebarButton"] button svg,
+[data-testid="stSidebar"] button[kind="header"] svg,
+[data-testid="stHeader"] button[kind="header"] svg,
+[data-testid="collapsedControl"] svg {
+    fill: #000000 !important;
+    color: #000000 !important;
+}
+
+[data-testid="stSidebarHeader"] button svg path,
+[data-testid="stSidebarCollapseButton"] button svg path,
+[data-testid="collapsedControl"] button svg path,
+[data-testid="stExpandSidebarButton"] button svg path,
+[data-testid="stSidebar"] button[kind="header"] svg path,
+[data-testid="stHeader"] button[kind="header"] svg path,
+[data-testid="collapsedControl"] svg path {
+    fill: #000000 !important;
+    stroke: #000000 !important;
+}
+
+/* =====================================================
    SIDEBAR STYLING (DEEP NAVY-TEAL, NEVER BLACK)
    ===================================================== */
 [data-testid="stSidebar"],
@@ -52,12 +116,13 @@ html, body, .stApp, [data-testid="stAppViewContainer"] {
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Fix All Text & Multipage Links Inside Sidebar */
+/* Fix All Text & Multipage Links Inside Sidebar (Excluding Toggle Button) */
 [data-testid="stSidebar"] p,
-[data-testid="stSidebar"] span,
 [data-testid="stSidebar"] label,
-[data-testid="stSidebar"] div,
-[data-testid="stSidebar"] a {
+[data-testid="stSidebar"] a,
+[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] span,
+[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] div,
+[data-testid="stSidebarNav"] span {
     color: #e2e8f0 !important;
 }
 
@@ -329,7 +394,7 @@ div[data-baseweb="input"] input {
 }
 
 /* =====================================================
-   VALUATION HERO CARD & KPI CARDS (MATCHES SCREENSHOTS)
+   VALUATION HERO CARD & KPI CARDS
    ===================================================== */
 .valuation-card {
     background: linear-gradient(125deg, #0b2233 0%, #103b49 55%, #15625c 100%);
@@ -389,7 +454,7 @@ div[data-baseweb="input"] input {
     margin-top: 3px;
 }
 
-/* Custom KPI Cards (Matches Market Overview Cards in Screenshot 1) */
+/* Custom KPI Cards */
 .kpi-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -757,7 +822,7 @@ with right_col:
         unsafe_allow_html=True,
     )
 
-    # 2. Sector Market Comparison Cards (Matching Market Overview KPI Cards)
+    # 2. Sector Market Comparison Cards
     sector_df = df[df["sector"] == val["sector"]].copy()
 
     if not sector_df.empty and "price" in sector_df.columns:
@@ -903,4 +968,41 @@ st.markdown(
 </div>
 """,
     unsafe_allow_html=True,
+)
+
+# =====================================================
+# ENSURE SIDEBAR STARTS OPEN ON INITIAL PAGE LOAD
+# (User can still hide/collapse it anytime via the arrow)
+# =====================================================
+components.html(
+    """
+    <script>
+    (function() {
+        const parentDoc = window.parent.document;
+        const currentPath = window.parent.location.pathname;
+        if (window.parent.__lastOpenedSidebarPath !== currentPath) {
+            window.parent.__lastOpenedSidebarPath = currentPath;
+            let attempts = 0;
+            const ensureOpen = setInterval(() => {
+                attempts++;
+                const expandBtn =
+                    parentDoc.querySelector('[data-testid="stExpandSidebarButton"] button') ||
+                    parentDoc.querySelector('[data-testid="collapsedControl"] button') ||
+                    parentDoc.querySelector('[data-testid="collapsedControl"]');
+                const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
+                const isCollapsed = sidebar && sidebar.getAttribute('aria-expanded') === 'false';
+
+                if (expandBtn && (isCollapsed || expandBtn.offsetParent !== null)) {
+                    expandBtn.click();
+                    clearInterval(ensureOpen);
+                } else if ((sidebar && sidebar.getAttribute('aria-expanded') === 'true') || attempts > 15) {
+                    clearInterval(ensureOpen);
+                }
+            }, 120);
+        }
+    })();
+    </script>
+    """,
+    height=0,
+    width=0,
 )
